@@ -8,13 +8,12 @@
  */
 
 function maxSubarraySum(nums, k) {
-  let windowSum = 0,
-    maxSubArraySum = 0;
+  let windowSum = 0;
 
   for (let j = 0; j < k; j++) windowSum += nums[j];
 
   // Doing this prevents the first window value from being thrown away. (Take first window value into account)
-  maxSubArraySum = windowSum;
+  let maxSubArraySum = windowSum;
 
   for (let i = 0; i + k < nums.length; i++) {
     windowSum = windowSum - nums[i] + nums[k + i];
