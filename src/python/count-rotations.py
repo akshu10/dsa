@@ -1,4 +1,4 @@
-def count_rotation(nums: list[int]) -> int:
+def count_rotation_linear_search(nums: list[int]) -> int:
     """
     An attempt at a brute force solution
     Idea: The number of the rotations is basically the position of smallest/first element
@@ -56,5 +56,5 @@ test_cases = [
 
 
 for test in test_cases:
-    print(count_rotation(**test["input"]) == test["output"])
+    print(count_rotation_linear_searchs(**test["input"]) == test["output"])
     print(count_rotation_binary_search(**test["input"]) == test["output"])
