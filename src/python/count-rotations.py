@@ -56,5 +56,10 @@ test_cases = [
 
 
 for test in test_cases:
-    print(count_rotation_linear_searchs(**test["input"]) == test["output"])
+    print(count_rotation_linear_search(**test["input"]) == test["output"])
     print(count_rotation_binary_search(**test["input"]) == test["output"])
+
+
+temp_list = [1]
+
+print(temp_list[1])
