@@ -47,19 +47,46 @@ def count_rotation_binary_search(nums: list[int]) -> int:
     return 0
 
 
+def count_rotation_binary_search_with_dupes(nums: list[int]) -> int:
+    """
+    Count right-rotations of a sorted array = index of the smallest element.
+    O(log n) normally; O(n) worst case when there are many duplicates.
+
+    Idea: keep a [low, high] window that always contains the smallest element.
+    Compare the middle element to the RIGHT end of the window (not to a
+    neighbour -- neighbours are useless on a run of equal values):
+      - nums[middle] > nums[high]  -> smallest is strictly right of middle
+      - nums[middle] < nums[high]  -> middle might be the smallest, keep it
+      - nums[middle] == nums[high] -> can't tell; drop the right end by one
+    When the window shrinks to a single index, that index is the answer.
+    """
+
+    if not nums:
+        return 0
+
+    low, high = 0, len(nums) - 1
+
+    while low < high:
+        middle = (low + high) // 2
+
+        if nums[middle] > nums[high]:
+            low = middle + 1
+        elif nums[middle] < nums[high]:
+            high = middle
+        else:
+            high -= 1
+
+    return low
+
+
 test_cases = [
     {"input": {"nums": []}, "output": 0},
     {"input": {"nums": [1]}, "output": 0},
     {"input": {"nums": [5, 7, 8, 1, 3, 4]}, "output": 3},
     {"input": {"nums": [6, -2, 0, 1, 3]}, "output": 1},
+    {"input": {"nums": [4, 5, 6, 6, 6]}, "output": 0},
+    {"input": {"nums": [5, 6, 6, 9, 9, 9, 0, 0, 2, 3, 3, 3, 3, 4, 4]}, "output": 6},
 ]
 
-
 for test in test_cases:
-    print(count_rotation_linear_search(**test["input"]) == test["output"])
-    print(count_rotation_binary_search(**test["input"]) == test["output"])
-
-
-temp_list = [1]
-
-print(temp_list[1])
+    print(count_rotation_binary_search_with_dupes(**test["input"]) == test["output"])
