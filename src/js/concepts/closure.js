@@ -6,6 +6,8 @@ function outer() {
     console.log(count);
   }
 
+  //count++;
+
   return inner;
 }
 
