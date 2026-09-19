@@ -6,13 +6,23 @@ function outer() {
     console.log(count);
   }
 
+  // Has a reference to var b due to hoisting
+  function inner2() {
+    console.log(b);
+    console.log(c);
+  }
+
+  var b = 111111;
+  // using a let/const will also work. Why? Because before the inner2() is executed the assignment to 'c' has happened in memory. (exists in scope)
+  let c = 222222;
   //count++;
 
-  return inner;
+  return [inner, inner2];
 }
 
-const innerFunction = outer();
+const functions = outer();
 /**@abstract
  * InnerFuntion console.logs 1 because functions always remember their lexical scope, in other words CLOSURE
  */
-innerFunction();
+functions[0]();
+functions[1]();
